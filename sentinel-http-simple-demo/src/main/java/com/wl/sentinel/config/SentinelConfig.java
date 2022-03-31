@@ -27,6 +27,5 @@ public class SentinelConfig {
         flowRule.setCount(3);
         list.add(flowRule);
         FlowRuleManager.loadRules(list);
-
     }
 }

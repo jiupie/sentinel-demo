@@ -27,6 +27,11 @@ public class HelloController {
             e.printStackTrace();
             return "系统繁忙";
         }
-
     }
+
+    @GetMapping("/test")
+    public String test() {
+        return "test";
+    }
+
 }
