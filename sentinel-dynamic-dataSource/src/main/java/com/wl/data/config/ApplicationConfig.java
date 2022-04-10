@@ -34,8 +34,7 @@ public class ApplicationConfig {
         final String dataId = "flowrule";
 
         ReadableDataSource<String, List<FlowRule>> flowRuleDataSource = new NacosDatasourceConfig<>(remoteAddress, groupId,
-                dataId, source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {
-        }));
+                dataId, source -> JSON.parseObject(source, new TypeReference<List<FlowRule>>() {}));
         FlowRuleManager.register2Property(flowRuleDataSource.getProperty());
     }
 }

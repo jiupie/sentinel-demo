@@ -1,0 +1,55 @@
+server:
+  port: 8071
+spring:
+  application:
+    name: sentinel-feign-client
+  cloud:
+    nacos:
+      discovery:
+        group: sentinel-cloud
+        namespace: public
+      server-addr: 127.0.0.1:8848
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8098
+feign:
+  sentinel:
+    enabled: true
+
+logging:
+  level:
+    root: debug
+dubbo:
+  application:
+    id: ${spring.application.name}
+    name: ${dubbo.application.id}
+  protocol:
+    id: dubbo
+    name: dubbo
+    threadpool: fixed
+    threads: 200
+    payload: 52428800
+    port: -1
+  registry:
+    id: sentinel-registry
+    address: spring-cloud://127.0.0.1:8848
+    timeout: 5000
+    session: 60000
+    check: true
+  provider:
+    group: zqh-service
+    version: 1.0.0
+    timeout: 60000
+    loadbalance: roundrobin
+    weight: 5
+    retries: 2
+    actives: 200
+    executes: 200
+  consumer:
+    group: zqh-service
+    version: 1.0.0
+    timeout: 60000
+    loadbalance: roundrobin
+    retries: 2
+    actives: 200
+    check: true

@@ -1,0 +1,11 @@
+server:
+  port: 8070
+spring:
+  cloud:
+    nacos:
+      discovery:
+        group: sentinel-cloud
+        namespace: public
+      server-addr: 127.0.0.1:8848
+  application:
+    name: sentinel-opefeign-provide
