@@ -1,7 +1,7 @@
 package com.wl.feign.web;
 
-import com.wl.feign.client.HelloFeign;
 import com.wl.dubbo.provide.SayProvide;
+import com.wl.feign.client.HelloFeign;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +18,7 @@ public class HelloRest {
     @Value("${server.port}")
     private Integer port;
 
-    @DubboReference
+    @DubboReference(mock = "")
     private SayProvide sayProvide;
 
     @Autowired
@@ -26,6 +26,9 @@ public class HelloRest {
 
     @GetMapping("/h")
     public String hello(String name) {
+        if ("error".equals(name)) {
+            throw new RuntimeException("error");
+        }
         return helloFeign.hello(name + "(" + port + ")" + "【" + sayProvide.sayChinese(name) + "】");
     }
 }
